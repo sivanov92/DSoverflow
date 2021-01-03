@@ -21,8 +21,8 @@ class UserController extends Controller
             return response()->json(['email'=>$email,'password'=>$password,'token'=>$token], 200);
         }
     }
-     return response()->json(['msg'=>'Error'],400);
-   }  
+    return response()->json(['details_received'=>['name'=>$name,'email'=>$email,'password'=>$password ]], 400);            
+}  
    public function Register(Request $request)
    {
      if ($request->has(['name','email','password'])) {
@@ -42,7 +42,7 @@ class UserController extends Controller
              return response()->json(['name'=>$name,'email'=>$email,'password'=>$password,'token'=>$token], 200);
          }
      }
-     return response()->json(['msg'=>'Error'],400);            
+     return response()->json(['details_received'=>['name'=>$name,'email'=>$email,'password'=>$password ]], 400);            
    }  
 
 }
