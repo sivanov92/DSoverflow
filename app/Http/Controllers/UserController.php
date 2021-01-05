@@ -12,9 +12,9 @@ class UserController extends Controller
     //
   public function Login(Request $request)
    {
-    if ($request->has(['email','password'])) {
-        $email =$request->input('email');
-        $password=$request->input('password');
+    if ($request->has(['0.email','0.password'])) {
+        $email =$request->input('0.email');
+        $password=$request->input('0.password');
         $token="";
         if (Auth::attempt(['email'=>$email,'password'=>$password])) {
             $token = $request->user()->currentAccessToken();
@@ -40,7 +40,7 @@ class UserController extends Controller
          $user->save();
          $token="";
          if (Auth::attempt(['email'=>$email,'password'=>$password])) {
-             $token = $request->user()->createToken($request->token_name);
+             $token = $request->user()->createToken(Str::random(10));
              return response()->json(['name'=>$name,'email'=>$email,'password'=>$password,'token'=>$token], 200);
          }
      }
