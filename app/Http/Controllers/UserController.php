@@ -27,11 +27,11 @@ class UserController extends Controller
    {
     $input = $request->input();
     //dd($input[0]);
-     if ($input[0]->has(['name','email','password'])) {
+     if ($request->has(['0.name','0.email','0.password'])) {
          dd('HAS - YES');
-         $name = $request->input('name');
-         $email =$request->input('email');
-         $password=$request->input('password');
+         $name = $request->input('0.name');
+         $email =$request->input('0.email');
+         $password=$request->input('0.password');
          $created_at = now();
          $user = new User;
          $user->name = $name;
