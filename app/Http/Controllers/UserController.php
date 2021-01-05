@@ -26,8 +26,9 @@ class UserController extends Controller
    public function Register(Request $request)
    {
     $input = $request->input();
-    dd($input[0]);
+    //dd($input[0]);
      if ($request->has(['name','email','password'])) {
+         dd('HAS - YES');
          $name = $request->input('name');
          $email =$request->input('email');
          $password=$request->input('password');
