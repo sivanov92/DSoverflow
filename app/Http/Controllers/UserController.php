@@ -25,7 +25,8 @@ class UserController extends Controller
 }  
    public function Register(Request $request)
    {
-        dd($request->input());
+    $input = $request->input();
+    dd($input[0]);
      if ($request->has(['name','email','password'])) {
          $name = $request->input('name');
          $email =$request->input('email');
