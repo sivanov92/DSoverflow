@@ -27,7 +27,7 @@ class UserController extends Controller
    {
     $input = $request->input();
     //dd($input[0]);
-     if ($request->has(['name','email','password'])) {
+     if ($input[0]->has(['name','email','password'])) {
          dd('HAS - YES');
          $name = $request->input('name');
          $email =$request->input('email');
