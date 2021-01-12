@@ -23,5 +23,12 @@
     <body class="antialiased">
        <h1>Welcome to DSoverflow app</h1>
        <h3>Make a POST request to /login or /register</h3>
+       <p>Login:</p>
+       <p>Expects "email" and "password" in the request</p>
+       <p>Returns "email","password" and "token" and the status code</p>
+       <p>Register:</p>
+       <p>Expects "name","email" and "password" in the request</p>
+       <p>Returns "name","email","password" and "token" and the status code</p>
+
     </body>
 </html>
