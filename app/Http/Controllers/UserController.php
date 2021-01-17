@@ -19,7 +19,7 @@ class UserController extends Controller
             $user=Auth::user();
             $token_coll=$user->tokens;
             foreach($token_coll as $t){
-                dump($token);
+                dump($t);
             }
             die;
             $token = $request->user()->createToken(Str::random(10))->plainTextToken;
