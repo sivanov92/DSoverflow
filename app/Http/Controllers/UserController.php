@@ -16,12 +16,6 @@ class UserController extends Controller
         $email =$request->input('0.email');
         $password=$request->input('0.password');
         if (Auth::attempt(['email'=>$email,'password'=>$password])) {
-            $user=Auth::user();
-            $token_coll=$user->tokens;
-            foreach($token_coll as $t){
-                dump($t);
-            }
-            die;
             $token = $request->user()->createToken(Str::random(10))->plainTextToken;
             return response()->json(['email'=>$email,'password'=>$password,'token'=>$token], 200);
         }
