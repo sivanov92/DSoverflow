@@ -83,11 +83,11 @@ class PostController extends Controller
     {
         //
         $post=  Post::findOrFail($id);
-        if(isset( $request->input('0.title'))){
+        if($request->input('0.title')!=""){
             $title = $request->input('0.title');
             $post->title = $title;
         }
-        if(isset( $request->input('0.content'))){
+        if($request->input('0.content')!=""){
             $content = $request->input('0.content');
             $post->content = $content;
         }       

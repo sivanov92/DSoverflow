@@ -16,7 +16,8 @@ class UserController extends Controller
         $email =$request->input('0.email');
         $password=$request->input('0.password');
         if (Auth::attempt(['email'=>$email,'password'=>$password])) {
-            $token = $request->user()->createToken(Str::random(10))->plainTextToken;
+            $token = $request->bearerToken();
+            // FIX AUTHENTIFICATION - clear out the auth model 
             return response()->json(['email'=>$email,'password'=>$password,'token'=>$token], 200);
         }
     }
@@ -39,6 +40,8 @@ class UserController extends Controller
          $user->save();
          if (Auth::attempt(['email'=>$email,'password'=>$password])) {
              $token = $request->user()->createToken(Str::random(10));
+             $user->access_token = $token->plainTextToken;
+             $user->save();
              return response()->json(['name'=>$name,'email'=>$email,'password'=>$password,'token'=>$token], 200);
          }
      }

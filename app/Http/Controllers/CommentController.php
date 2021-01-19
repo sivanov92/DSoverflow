@@ -35,6 +35,14 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         //
+        $content= $request->input('0.content') ;
+        $comment = new Comment;
+        $comment->content = $content;
+        $comment->created_at = now();
+        $comment->user = $request->user->id(); 
+        $comment->post = $request->input('0.post_id');
+        $comment->save();
+  
     }
 
     /**
@@ -46,6 +54,7 @@ class CommentController extends Controller
     public function show($id)
     {
         //
+      return Comment::findOrFail($id);  
     }
 
     /**
@@ -69,6 +78,11 @@ class CommentController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $content= $request->input('0.content') ;
+        $comment = Comment::findOrFail($id);
+        $comment->content = $content;
+        $comment->save(); 
+        return response('Success');
     }
 
     /**
@@ -80,5 +94,7 @@ class CommentController extends Controller
     public function destroy($id)
     {
         //
+       $comment = Comment::find($id);
+       $comment->delete(); 
     }
 }
