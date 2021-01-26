@@ -18,7 +18,15 @@ class UserController extends Controller
         if (Auth::attempt(['email'=>$email,'password'=>$password])) {
             $token = $request->bearerToken();
             // FIX AUTHENTIFICATION - clear out the auth model 
-            return response()->json(['email'=>$email,'password'=>$password,'token'=>$token], 200);
+            $user = $request->user();
+            if ($token == $user->access_token) {
+                return response()->json(['email'=>$email,'password'=>$password,'token'=>$token], 200);
+            }
+            else
+             {
+                 Auth::logout();
+                 return response()->json(['message' => 'failed'], 400);              
+             }  
         }
     }
     return response()->json(['details_received'=>['email'=>$email,'password'=>$password ]], 400);            

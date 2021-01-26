@@ -18,7 +18,8 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->string('content');
             $table->dateTime('created_at', $precision = 0);
-            $table->foreign('comment_id')->references('id')->on('comments');
+            $table->unsignedBigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
