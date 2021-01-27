@@ -40,6 +40,10 @@ class PostController extends Controller
             '0.title' => 'required|max:255',
             '0.content' => 'required',
         ]);
+        if(!$validated){
+            return response('Validator failed',400);
+        }
+
         //
       $title = $request->input('0.title');
       $content= $request->input('0.content') ;

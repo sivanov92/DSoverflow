@@ -38,6 +38,9 @@ class CommentController extends Controller
         $validated = $request->validate([
             '0.content' => 'required',
         ]);
+        if(!$validated){
+            return response('Validator failed',400);
+        }
         //
         $content= $request->input('0.content') ;
         $comment = new Comment;

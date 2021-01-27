@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,3 +23,8 @@ Route::get('/', function () {
 Route::post('/login',[UserController::class,'Login']);
 
 Route::post('/register',[UserController::class,'Register']);
+
+Route::apiResources(['posts'    => PostController::class,
+                     'comments' => CommentController::class]);
+
+
