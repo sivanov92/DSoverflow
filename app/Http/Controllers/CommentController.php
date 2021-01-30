@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comment;
+use App\Http\Controllers\ListController;
+
 class CommentController extends Controller
 {
     /**
@@ -49,7 +51,11 @@ class CommentController extends Controller
         $comment->user = $request->user->id(); 
         $comment->post = $request->input('0.post_id');
         $comment->save();
-  
+        $cache_key1 = ListController::CACHE_KEY.'.CommentsPerPost.'.$comment->post;
+        $cache_key2 = ListController::CACHE_KEY.'.CommentsPerUser.'.$comment->user;
+        cache()->forget($cache_key1);
+        cache()->forget($cache_key2);
+
     }
 
     /**
@@ -89,6 +95,11 @@ class CommentController extends Controller
         $comment = Comment::findOrFail($id);
         $comment->content = $content;
         $comment->save(); 
+        $cache_key1 = ListController::CACHE_KEY.'.CommentsPerPost.'.$comment->post;
+        $cache_key2 = ListController::CACHE_KEY.'.CommentsPerUser.'.$comment->user;
+        cache()->forget($cache_key1);
+        cache()->forget($cache_key2);
+
         return response('Success');
     }
 
@@ -102,6 +113,10 @@ class CommentController extends Controller
     {
         //
        $comment = Comment::find($id);
-       $comment->delete(); 
+       $cache_key1 = ListController::CACHE_KEY.'.CommentsPerPost.'.$comment->post;
+       $cache_key2 = ListController::CACHE_KEY.'.CommentsPerUser.'.$comment->user;
+       cache()->forget($cache_key1);
+       cache()->forget($cache_key2);
+       $comment->delete();    
     }
 }

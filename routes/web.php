@@ -28,9 +28,9 @@ Route::post('/register',[UserController::class,'Register']);
 Route::apiResources(['posts'    => PostController::class,
                      'comments' => CommentController::class]);
 
-Route::get('/lists/posts/{$max}',[ListController::class , 'getPostsList']);                     
-Route::get('/lists/posts/{$user_id}/{$limit}/{$offset}',[ListController::class , 'getPostsPerUser']);                     
-Route::get('/lists/comments/{$user_id}/{$limit}/{$offset}',[ListController::class , 'getCommentsPerUser']);                     
-Route::get('/lists/comments/{$post_id}/{$limit}/{$offset}',[ListController::class , 'getCommentsPerPost']);                     
+Route::get('/lists/posts/limit/{limit}/offset/{offset}',[ListController::class , 'getPostsList']);                     
+Route::get('/lists/posts/user-id/{user_id}/limit/{limit}/offset/{offset}',[ListController::class , 'getPostsPerUser']);                     
+Route::get('/lists/comments/user-id/{user_id}/limit/{limit}/offset/{offset}',[ListController::class , 'getCommentsPerUser']);                     
+Route::get('/lists/comments/post-id/{post_id}/limit/{limit}/offset/{offset}',[ListController::class , 'getCommentsPerPost']);                     
 
 

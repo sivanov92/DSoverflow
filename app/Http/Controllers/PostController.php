@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Http\Controllers\ListController;
 
 class PostController extends Controller
 {
@@ -53,6 +54,10 @@ class PostController extends Controller
       $post->created_at = now();
       $post->user = $request->user->id(); 
       $post->save();
+      $cache_key1 = ListController::CACHE_KEY.'.PostList';
+      $cache_key2 = ListController::CACHE_KEY.'.PostsPerUser.'.$post->user;
+      cache()->forget($cache_key1);
+      cache()->forget($cache_key2);
 
       return response("Success");
     }
@@ -100,7 +105,12 @@ class PostController extends Controller
             $content = $request->input('0.content');
             $post->content = $content;
         }       
-        $post->save();         
+        $post->save();     
+        $cache_key1 = ListController::CACHE_KEY.'.PostList';
+        $cache_key2 = ListController::CACHE_KEY.'.PostsPerUser.'.$post->user;
+        cache()->forget($cache_key1);
+        cache()->forget($cache_key2);
+  
     }
 
     /**
@@ -113,6 +123,11 @@ class PostController extends Controller
     {
         //
       $post = Post::find($id);
+      $cache_key1 = ListController::CACHE_KEY.'.PostList';
+      $cache_key2 = ListController::CACHE_KEY.'.PostsPerUser.'.$post->user;
       $post->delete();  
+      cache()->forget($cache_key1);
+      cache()->forget($cache_key2);
+
     }
 }
