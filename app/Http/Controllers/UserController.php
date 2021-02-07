@@ -45,7 +45,6 @@ class UserController extends Controller
          $user->email = $email;
          $user->created_at = $created_at;
          $user->password = Hash::make($password);
-         $user->save();
          if (Auth::attempt(['email'=>$email,'password'=>$password])) {
              $token = $request->user()->createToken(Str::random(10));
              $user->access_token = $token->plainTextToken;
