@@ -38,16 +38,16 @@ class PostController extends Controller
     {
         //
         $validated = $request->validate([
-            '0.title' => 'required|max:255',
-            '0.content' => 'required',
+            'title' => 'required|max:255',
+            'content' => 'required',
         ]);
         if(!$validated){
             return response('Validator failed',400);
         }
 
         //
-      $title = $request->input('0.title');
-      $content= $request->input('0.content') ;
+      $title = $request->input('title');
+      $content= $request->input('content') ;
       $post = new Post;
       $post->title = $title;
       $post->content = $content;
@@ -55,8 +55,8 @@ class PostController extends Controller
       $post->user = $request->user->id(); 
 
       $tag_list=array();
-      if ($request->has('0.tags')) {
-          array_push($tag_list, $request->input('0.tags'));
+      if ($request->has('tags')) {
+          array_push($tag_list, $request->input('tags'));
       }
       $post->tags()->attach($tag_list);
 
@@ -104,17 +104,17 @@ class PostController extends Controller
     {
         //
         $post=  Post::findOrFail($id);
-        if($request->input('0.title')!=""){
-            $title = $request->input('0.title');
+        if($request->input('title')!=""){
+            $title = $request->input('title');
             $post->title = $title;
         }
-        if($request->input('0.content')!=""){
-            $content = $request->input('0.content');
+        if($request->input('content')!=""){
+            $content = $request->input('content');
             $post->content = $content;
         }       
         $tag_list=array();
-        if ($request->has('0.tags')) {
-            array_push($tag_list, $request->input('0.tags'));
+        if ($request->has('tags')) {
+            array_push($tag_list, $request->input('tags'));
             $post->tags()->attach($tag_list);
         }
   

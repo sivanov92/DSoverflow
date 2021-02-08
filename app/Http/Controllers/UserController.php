@@ -12,12 +12,11 @@ class UserController extends Controller
     //
   public function Login(Request $request)
    {
-    if ($request->has(['0.email','0.password'])) {
-        $email =$request->input('0.email');
-        $password=$request->input('0.password');
+    if ($request->has(['email','password'])) {
+        $email =$request->input('email');
+        $password=$request->input('password');
         if (Auth::attempt(['email'=>$email,'password'=>$password])) {
             $token = $request->bearerToken();
-            // FIX AUTHENTIFICATION - clear out the auth model 
             $user = $request->user();
             if ($token == $user->access_token) {
                 return response()->json(['email'=>$email,'password'=>$password,'token'=>$token], 200);
@@ -25,20 +24,19 @@ class UserController extends Controller
             else
              {
                  Auth::logout();
-                 return response()->json(['message' => 'failed'], 400);              
+                 return response('The token provided does not match',401);              
              }  
         }
     }
-    return response()->json(['details_received'=>['email'=>$email,'password'=>$password ]], 400);            
+    return response('Error ! Can not login this user , please check your credentials', 400);            
 }  
    public function Register(Request $request)
    {
     $input = $request->input();
-    //dd($input[0]);
-     if ($request->has(['0.name','0.email','0.password'])) {
-         $name = $request->input('0.name');
-         $email =$request->input('0.email');
-         $password=$request->input('0.password');
+     if ($request->has(['name','email','password'])) {
+         $name = $request->input('name');
+         $email =$request->input('email');
+         $password=$request->input('password');
          $created_at = now();
          $user = new User;
          $user->name = $name;
@@ -54,7 +52,7 @@ class UserController extends Controller
              return response()->json(['name'=>$name,'email'=>$email,'password'=>$password,'token'=>$token], 200);
          }
      }
-     return response()->json(['details_received'=>['name'=>$name,'email'=>$email,'password'=>$password ]], 400);            
+     return response('Can not register a new user !', 400);            
    }  
 
 }

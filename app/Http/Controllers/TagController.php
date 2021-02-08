@@ -38,14 +38,14 @@ class TagController extends Controller
     {
         //
         $validated = $request->validate([
-            '0.name' => 'required|max:255',
+            'name' => 'required|max:255',
         ]);
         if(!$validated){
             return response('Validator failed',400);
         }
 
         //
-      $name = $request->input('0.name') ;
+      $name = $request->input('name') ;
       $tag = new Tag;
       $tag -> name = $name ;
       $tag ->created_at = now();
@@ -91,14 +91,14 @@ class TagController extends Controller
     {
         //
         $validated = $request->validate([
-            '0.name' => 'required|max:255',
+            'name' => 'required|max:255',
         ]);
         if(!$validated){
             return response('Validator failed',400);
         }
 
         //
-      $name = $request->input('0.name') ;
+      $name = $request->input('name') ;
       $tag = Tag::findOrFail($id);
       $tag -> name = $name ;
       $tag ->save();
