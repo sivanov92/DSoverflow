@@ -26,9 +26,11 @@ Route::post('/login',[UserController::class,'Login']);
 
 Route::post('/register',[UserController::class,'Register']);
 
-Route::apiResources(['posts'    => PostController::class,
-                     'comments' => CommentController::class,
-                     'tags'     => TagController::class])->middleware('check_token');
+Route::middleware('check_token')->group(function(){
+    Route::apiResources(['posts'    => PostController::class,
+    'comments' => CommentController::class,
+    'tags'     => TagController::class]);
+});
 
 Route::get('/lists/posts/limit/{limit}/offset/{offset}',[ListController::class , 'getPostsList']);                     
 Route::get('/lists/posts/user-id/{user_id}/limit/{limit}/offset/{offset}',[ListController::class , 'getPostsPerUser']);                     
