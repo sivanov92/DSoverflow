@@ -52,14 +52,17 @@ class PostController extends Controller
       $post->title = $title;
       $post->content = $content;
       $post->created_at = now();
-      $post->user = $request->user->id(); 
+      $post->user_id = $request->user()->id; 
+      $post->save();
 
       $tag_list=array();
       if ($request->has('tags')) {
-          array_push($tag_list, $request->input('tags'));
+        $post->tags()->attach( $request->input('tags'));
       }
-      $post->tags()->attach($tag_list);
-
+      else {
+        $post->tags()->attach($tag_list);
+      }
+      
       $post->save();
       $cache_key1 = ListController::CACHE_KEY.'.PostList';
       $cache_key2 = ListController::CACHE_KEY.'.PostsPerUser.'.$post->user;

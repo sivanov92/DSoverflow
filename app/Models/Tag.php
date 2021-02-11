@@ -12,6 +12,8 @@ class Tag extends Model
         'name',
         'created_at'
     ];
+    public $timestamps = false;
+
     public function posts()
     {
         return $this->belongsToMany(Post::class);

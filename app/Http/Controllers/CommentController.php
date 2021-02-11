@@ -48,8 +48,8 @@ class CommentController extends Controller
         $comment = new Comment;
         $comment->content = $content;
         $comment->created_at = now();
-        $comment->user = $request->user->id(); 
-        $comment->post = $request->input('post_id');
+        $comment->user_id = $request->user()->id; 
+        $comment->post_id = $request->input('post_id');
         $comment->save();
         $cache_key1 = ListController::CACHE_KEY.'.CommentsPerPost.'.$comment->post;
         $cache_key2 = ListController::CACHE_KEY.'.CommentsPerUser.'.$comment->user;

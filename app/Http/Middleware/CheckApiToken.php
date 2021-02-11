@@ -28,13 +28,7 @@ class CheckApiToken
          {
           $user_token = $user->access_token;
           if( $token == $user_token){  
-             //Login user
-             if (Auth::login($user)) {
-                 return $next($request);
-             }
-             else {
-                return response('The User for the API token can not be authorized !',401); 
-             }
+            return $next($request);
           }
          }
         return response('The passed token does not match any user !',401);

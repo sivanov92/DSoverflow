@@ -12,6 +12,8 @@ class Comment extends Model
         'content',
         'created_at'
     ];
+    public $timestamps = false;
+
     public function post()
     {
         return $this->belongsTo(Post::class);

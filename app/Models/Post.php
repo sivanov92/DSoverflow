@@ -13,6 +13,8 @@ class Post extends Model
         'content',
         'created_at',
     ];
+    public $timestamps = false;
+
     public function comments()
     {
         return $this->hasMany(Comment::class);
