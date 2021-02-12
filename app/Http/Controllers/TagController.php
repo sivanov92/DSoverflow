@@ -53,7 +53,7 @@ class TagController extends Controller
       $cache_key1 = ListController::CACHE_KEY.'.TagList';
       cache()->forget($cache_key1);
 
-      return response("Success");
+      return response($tag,201);
 
     }
 
@@ -105,7 +105,7 @@ class TagController extends Controller
       $cache_key1 = ListController::CACHE_KEY.'.TagList';
       cache()->forget($cache_key1);
 
-      return response("Success");
+      return response($tag,200);
     }
 
     /**
@@ -122,7 +122,7 @@ class TagController extends Controller
       $cache_key1 = ListController::CACHE_KEY.'.TagList';
       cache()->forget($cache_key1);
 
-      return response("Tag Deleted");
+      return response($tag,200);
   
     }
 }

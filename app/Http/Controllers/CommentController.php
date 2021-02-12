@@ -55,7 +55,7 @@ class CommentController extends Controller
         $cache_key2 = ListController::CACHE_KEY.'.CommentsPerUser.'.$comment->user;
         cache()->forget($cache_key1);
         cache()->forget($cache_key2);
-
+        return response($comment,201);
     }
 
     /**
@@ -100,7 +100,7 @@ class CommentController extends Controller
         cache()->forget($cache_key1);
         cache()->forget($cache_key2);
 
-        return response('Success');
+        return response($comment,200);
     }
 
     /**
@@ -118,5 +118,6 @@ class CommentController extends Controller
        cache()->forget($cache_key1);
        cache()->forget($cache_key2);
        $comment->delete();    
+       return response($comment,200);
     }
 }

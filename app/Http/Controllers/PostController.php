@@ -69,7 +69,7 @@ class PostController extends Controller
       cache()->forget($cache_key1);
       cache()->forget($cache_key2);
 
-      return response("Success");
+      return response($post,201);
     }
 
     /**
@@ -126,7 +126,7 @@ class PostController extends Controller
         $cache_key2 = ListController::CACHE_KEY.'.PostsPerUser.'.$post->user;
         cache()->forget($cache_key1);
         cache()->forget($cache_key2);
-  
+        return response($post,200);
     }
 
     /**
@@ -144,6 +144,7 @@ class PostController extends Controller
       $post->delete();  
       cache()->forget($cache_key1);
       cache()->forget($cache_key2);
+      return response($post,200);
 
     }
 }
