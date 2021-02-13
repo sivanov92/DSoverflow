@@ -1,0 +1,28 @@
+{
+    "endpoint" : "/comments",
+    "method" : "POST",
+    "description" : "used for CRUD comments",
+    "headers":[
+        "Authorization : Bearer XXXXX",
+        "Content-Type : application/json" 
+    ],
+    "body":{
+        "content":"required",
+        "post_id":"bigInt"
+    },
+    "response":{
+        "codes":{
+            "201":"Created",
+            "401":"Unauthorized",
+            "404":"Not Found"
+        },
+        "json":{
+            "id" : "bigInt",
+            "content":"required",
+            "created_at":"datetime",
+            "user":"bigInt",
+            "post":"bigInt"
+        }
+    }
+
+}

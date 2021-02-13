@@ -1,0 +1,24 @@
+{
+    "endpoint" : "/comments/{id}",
+    "method" : "DELETE",
+    "description" : "used for CRUD comments",
+    "headers":[
+        "Authorization : Bearer XXXXX",
+        "Content-Type : application/json" 
+    ],
+    "response":{
+        "codes":{
+            "200":"Ok",
+            "401":"Unauthorized",
+            "404":"Not Found"
+        },
+        "json":{
+            "id" : "bigInt",
+            "content":"required",
+            "created_at":"datetime",
+            "user":"bigInt",
+            "post":"bigInt"
+        }
+    }
+
+}

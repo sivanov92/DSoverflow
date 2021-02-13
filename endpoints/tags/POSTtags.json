@@ -1,0 +1,26 @@
+{
+    "endpoint" : "/tags",
+    "method" : "POST",
+    "description" : "used for CRUD tags",
+    "headers":[
+        "Authorization : Bearer XXXXX",
+        "Content-Type : application/json" 
+    ],
+    "body":{
+        "name":"required"
+    },
+    "response":{
+        "codes":{
+            "201":"Ok",
+            "401":"Unauthorized",
+            "404":"Not Found"
+        },
+        "json":{
+            "id" : "bigInt",
+            "name":"required",
+            "created_at":"datetime",
+            "posts":"array|bigInt"
+        }
+    }
+
+}

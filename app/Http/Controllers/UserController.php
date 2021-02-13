@@ -16,19 +16,10 @@ class UserController extends Controller
         $email =$request->input('email');
         $password=$request->input('password');
         if (Auth::attempt(['email'=>$email,'password'=>$password])) {
-            $token = $request->bearerToken();
-            $user = $request->user();
-            if ($token == $user->access_token) {
-                return response()->json(['email'=>$email,'password'=>$password,'token'=>$token], 200);
-            }
-            else
-             {
-                 Auth::logout();
-                 return response('The token provided does not match',401);              
-             }  
+           return response("User successfully logged in !",200);
         }
     }
-    return response('Error ! Can not login this user , please check your credentials', 400);            
+    return response('Error ! Can not login this user , please check the credentials', 401);            
 }  
    public function Register(Request $request)
    {
@@ -49,7 +40,7 @@ class UserController extends Controller
              $token = $request->user()->createToken(Str::random(10));
              $user->access_token = $token->plainTextToken;
              $user->save();
-             return response()->json(['name'=>$name,'email'=>$email,'password'=>$password,'token'=>$token], 200);
+             return response($user, 201);
          }
      }
      return response('Can not register a new user !', 400);            

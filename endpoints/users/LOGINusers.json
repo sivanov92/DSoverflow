@@ -1,0 +1,22 @@
+{
+    "endpoint" : "/login",
+    "method" : "POST",
+    "description" : "check for login with email and pass",
+    "headers":[
+        "Content-Type : application/json" 
+    ],
+    "body":{
+        "email":"required",
+        "password": "required"
+    },
+    "response":{
+        "codes":{
+            "200":"Ok",
+            "401":"Unauthorized"
+        },
+        "json":{
+          "message":" XXXX"
+        }
+    }
+
+}

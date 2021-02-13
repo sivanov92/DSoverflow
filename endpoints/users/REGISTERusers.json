@@ -1,0 +1,32 @@
+{
+    "endpoint" : "/register",
+    "method" : "POST",
+    "description" : "used for registering new users",
+    "headers":[
+        "Content-Type : application/json" 
+    ],
+    "body":{
+        "name":"required",
+        "email":"required",
+        "password": "required"
+    },
+    "response":{
+        "codes":{
+            "201":"Created",
+            "400":"Bad Request",
+            "404":"Not Found"
+        },
+        "json":{
+            "id" : "bigInt",
+            "name":"string",
+            "email":"string",
+            "password": "string",    
+            "created_at":"datetime",
+            "access_token":"Hash",
+
+            "posts":"array|ids",
+            "comments":"array|ids"
+        }
+    }
+
+}

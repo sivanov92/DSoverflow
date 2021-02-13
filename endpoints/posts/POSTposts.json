@@ -1,0 +1,30 @@
+{
+    "endpoint" : "/posts",
+    "method" : "POST",
+    "description" : "used for CRUD posts",
+    "headers":[
+        "Authorization : Bearer XXXXX",
+        "Content-Type : application/json" 
+    ],
+    "body":{
+     "title":"required|max:255",
+     "content":"required",
+     "tags":"optional|array|ids"
+    },
+    "response":{
+        "codes":{
+            "201":"Created",
+            "401":"Unauthorized",
+            "404":"Not Found"
+        },
+        "json":{
+            "id" : "bigInt",
+            "title":"required|max:255",
+            "content":"required",
+            "created_at":"datetime",
+            "user_id":"bigInt",
+            "tags":"array|ids"
+        }
+    }
+
+}
