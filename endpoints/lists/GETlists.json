@@ -1,0 +1,18 @@
+{
+    "description":"Use the set of endpoints here to receive lists of comments,tags,posts by different specs",
+    "method" : "GET",
+    "endpoints":{
+        "/lists/posts" : "Get All Posts",
+        "/lists/posts/user-id/{user-id}" : "Get Posts Per User",
+        "/lists/comments/user-id/{user-id}":"Get Comments PEr user",
+        "/lists/comments/post-id/{post-id}":"Get comments per post id",
+        "/lists/tags/":"Get all tags",
+        "/lists/posts/tag-id/{tag-id}":"Get posts per tag",
+        "/lists/tags/post-id/{post-id}":"Get tags per post"
+    },
+    "optional_parameters":{
+        "limit":"Results per page",
+        "offset":"Page number",
+        "EXAMPLE":"/lists/XXXX?limit=1&offset=0"
+    }
+}
