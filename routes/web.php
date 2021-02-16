@@ -32,13 +32,13 @@ Route::middleware('check_token')->group(function(){
     'tags'     => TagController::class]);
 });
 
-Route::get('/lists/posts/{limit?}/{offset?}',[ListController::class , 'getPostsList']);                     
-Route::get('/lists/posts/user-id/{user_id}/{limit?}/{offset?}',[ListController::class , 'getPostsPerUser']);                     
-Route::get('/lists/comments/user-id/{user_id}/{limit?}/{offset?}',[ListController::class , 'getCommentsPerUser']);                     
-Route::get('/lists/comments/post-id/{post_id}/{limit?}/{offset?}',[ListController::class , 'getCommentsPerPost']);                     
+Route::get('/lists/posts',[ListController::class , 'getPostsList']);                     
+Route::get('/lists/posts/user-id/{user_id}',[ListController::class , 'getPostsPerUser']);                     
+Route::get('/lists/comments/user-id/{user_id}',[ListController::class , 'getCommentsPerUser']);                     
+Route::get('/lists/comments/post-id/{post_id}',[ListController::class , 'getCommentsPerPost']);                     
 
-Route::get('/lists/tags/{limit?}/{offset?}',[ListController::class , 'getAllTags']);                     
-Route::get('/lists/posts/tag-id/{tag_id}/{limit?}/{offset?}',[ListController::class , 'getPostsPerTag']);                     
-Route::get('/lists/tags/post-id/{post_id}/{limit?}/{offset?}',[ListController::class , 'getTagsOfPost']);                     
+Route::get('/lists/tags',[ListController::class , 'getAllTags']);                     
+Route::get('/lists/posts/tag-id/{tag_id}',[ListController::class , 'getPostsPerTag']);                     
+Route::get('/lists/tags/post-id/{post_id}',[ListController::class , 'getTagsOfPost']);                     
 
 
