@@ -13,7 +13,17 @@ class ListController extends Controller
     const CACHE_MINUTES = 5;
     //
    public function getPostsList(){
-    $list = Post::all();
+    $limit = 10;
+    $offset = 0;
+    if(isset($_GET['limit'])){
+      $limit = $_GET['limit'];
+    } 
+    if(isset($_GET['offset'])){
+      $limit = $_GET['offset'];
+    } 
+    $list = Post::take($limit)
+                  ->skip($offset)
+                  ->get();
     $key = self::CACHE_KEY.".PostList";
     return cache()->remember($key,now()->addMinutes(self::CACHE_MINUTES),function() use ($list){
       return $list;
@@ -48,27 +58,37 @@ class ListController extends Controller
    }
    //Tags
    public function getPostsPerTag($tag_id){
-    $posts = Post::all();
-    $list = $posts->tags()
-              -> where('tag_id' , $tag_id)
-              -> get();
-   $key = self::CACHE_KEY.".PostsPerTag.".$tag_id;
+    $list = Post::whereHas('tags',function($query) use ($tag_id) {
+      $query->where('tag_id',$tag_id);
+    })->get(); 
+    $key = self::CACHE_KEY.".PostsPerTag.".$tag_id;
    return cache()->remember($key,now()->addMinutes(self::CACHE_MINUTES),function() use ($list){
     return $list;
   });           
 }
 public function getTagsOfPost($post_id){
-  $tags = Tag::all();
-  $list = $tags->posts()
-            -> where('post_id' , $post_id)
-            -> get();
+  $list = Tag::whereHas('posts',function($query) use ($post_id) {
+    $query->where('post_id',$post_id);
+  })->get();
+
  $key = self::CACHE_KEY.".TagsPerPost.".$post_id;
  return cache()->remember($key,now()->addMinutes(self::CACHE_MINUTES),function() use ($list){
   return $list;
 });           
 }
 public function getAllTags(){
-  $list = Tag::all();
+  $limit = 10;
+  $offset = 0;
+  if(isset($_GET['limit'])){
+    $limit = $_GET['limit'];
+  } 
+  if(isset($_GET['offset'])){
+    $limit = $_GET['offset'];
+  } 
+
+  $list = Tag::take($limit)
+               ->skip($offset)
+               ->get();
  $key = self::CACHE_KEY.".TagList";
  return cache()->remember($key,now()->addMinutes(self::CACHE_MINUTES),function() use ($list){
   return $list;

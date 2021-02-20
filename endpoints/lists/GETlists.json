@@ -13,6 +13,7 @@
     "optional_parameters":{
         "limit":"Results per page",
         "offset":"Page number",
-        "EXAMPLE":"/lists/XXXX?limit=1&offset=0"
+        "EXAMPLE":"/lists/XXXX?limit=1&offset=0",
+        "NOTE":"Only working currently for getAllPosts and getAllTags"
     }
 }
